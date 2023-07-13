@@ -37,8 +37,8 @@ jobs:
               with:
                 host: ${{ secrets.SERVER }}
                 username: ${{ secrets.SERVER_USERNAME }}
+                password: ${{ secrets.SERVER_PASSWORD}}
                 port: ${{ secrets.SERVER_PORT }}
-                private-key: ${{ secrets.PRIVATE_KEY_SERVER }}
                 script: 
                     whoami
                     docker stop api-pc-ipm || true && docker rm api-pc-ipm || true
