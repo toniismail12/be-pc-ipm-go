@@ -33,7 +33,7 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - name: Deploy to VPS 
-              uses: toni/ssh-action@master
+              uses: toniismail12/be-pc-ipm@staging
               with:
                 host: ${{ secrets.SERVER }}
                 username: ${{ secrets.SERVER_USERNAME }}
