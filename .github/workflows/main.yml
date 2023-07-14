@@ -43,7 +43,7 @@ jobs:
             docker images -f "dangling=true" --format "{{.ID}}" | xargs -r docker rmi
 
   deployment:
-    needs: build-and-push
+    needs: cleanup-container
     environment: staging
     runs-on: ubuntu-22.04
     steps:  
