@@ -19,8 +19,10 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - name: Connect to DockerHub
-              run: |
-                echo ${{ secrets.DOCKER_TOKEN }} | docker login --username toniismailz --password-stdin
+              uses: docker/login-action@v2
+              with:
+                username: toniismailz
+                password: ${{ secrets.DOCKER_TOKEN }}
 
             - name: Push Docker image to DockerHub
               run: |
