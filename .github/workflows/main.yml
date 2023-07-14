@@ -25,7 +25,7 @@ jobs:
         run: |
           docker push ${{ vars.IMAGE_NAME }}:latest-and-mantul
 
-  cleanup-container:
+  deployment:
     needs: build-and-push
     environment: staging
     runs-on: ubuntu-22.04
@@ -41,19 +41,5 @@ jobs:
             docker stop $(docker ps -q --filter "publish=9001")
             docker ps -aq --filter "status=exited" | xargs -r docker rm
             docker images -f "dangling=true" --format "{{.ID}}" | xargs -r docker rmi
-
-  deployment:
-    needs: cleanup-container
-    environment: staging
-    runs-on: ubuntu-22.04
-    steps:  
-      - name: Pull New Image Docker
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.SERVER }}
-          username: ${{ secrets.SERVER_USERNAME }}
-          password: ${{ secrets.SERVER_PASSWORD}}
-          port: ${{ secrets.SERVER_PORT }}
-          script: |
             docker pull ${{ vars.IMAGE_NAME }}:latest-and-mantul
             docker run -d --restart=always -p 9001:9001 ${{ vars.IMAGE_NAME }}:latest-and-mantul
