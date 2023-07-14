@@ -38,7 +38,7 @@ jobs:
           password: ${{ secrets.SERVER_PASSWORD}}
           port: ${{ secrets.SERVER_PORT }}
           script: |
-            CONTAINER_ID=$(docker ps --filter "ancestor=${{ vars.IMAGE_NAME }}:latest-and-mantul" -q) echo "Container ID: $CONTAINER_ID"
+            CONTAINER_ID=$(docker ps --filter "ancestor=${{ vars.IMAGE_NAME }}:latest-and-mantul" -q) echo "CONTAINER ID: $CONTAINER_ID"
             docker stop $CONTAINER_ID
             docker rm $CONTAINER_ID
             docker pull ${{ vars.IMAGE_NAME }}:latest-and-mantul
