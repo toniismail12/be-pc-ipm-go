@@ -38,6 +38,5 @@ jobs:
                 password: ${{ secrets.SERVER_PASSWORD}}
                 port: ${{ secrets.SERVER_PORT }}
                 script: 
-                    whoami
                     docker pull ${{ secrets.DOCKER_USERNAME }}/${{ vars.IMAGE_NAME }}:${{ github.sha }}
-                    docker run -d --restart=always -p 9001:9001 ${{ secrets.DOCKER_USERNAME }}/${{ vars.IMAGE_NAME }}:${{ github.sha }}
+                    sudo docker run -d --restart=always -p 9001:9001 ${{ secrets.DOCKER_USERNAME }}/${{ vars.IMAGE_NAME }}:${{ github.sha }}
