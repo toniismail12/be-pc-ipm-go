@@ -41,3 +41,4 @@ jobs:
             docker stop $(docker ps -q --filter "publish=9001")
             docker pull ${{ vars.IMAGE_NAME }}:latest-and-mantul
             docker run -d --restart always -p 9001:9001 ${{ vars.IMAGE_NAME }}:latest-and-mantul
+            docker images -f "dangling=true" --format "{{.ID}}" | xargs -r docker rmi
