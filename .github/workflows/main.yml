@@ -38,8 +38,7 @@ jobs:
           password: ${{ secrets.SERVER_PASSWORD}}
           port: ${{ secrets.SERVER_PORT }}
           script: |
-            CONTAINER_ID=$(docker ps --filter "ancestor=${{ vars.IMAGE_NAME }}:latest-and-mantul" -q) echo "CONTAINER ID: $CONTAINER_ID"
-            docker stop $CONTAINER_ID
-            docker rm $CONTAINER_ID
+            docker stop $(docker ps -q --filter "publish=9001")
+            docker rm $(docker ps -q --filter "publish=9001")
             docker pull ${{ vars.IMAGE_NAME }}:latest-and-mantul
             docker run -d --restart always -p 9001:9001 ${{ vars.IMAGE_NAME }}:latest-and-mantul
