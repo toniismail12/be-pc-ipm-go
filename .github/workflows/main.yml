@@ -42,5 +42,5 @@ jobs:
                 script: 
                     whoami
                     docker stop api-pc-ipm || true && docker rm api-pc-ipm || true
-                    docker pull ${{ vars.IMAGE_NAME }}
-                    docker run -d -p 9001:9001 --name ${{ secrets.CONTAINER_NAME }} ${{ secrets.vars.IMAGE_NAME }}
+                    docker pull toniismailz/${{ vars.IMAGE_NAME }}
+                    docker run -d -p 9001:9001 --name ${{ vars.CONTAINER_NAME }} ${{ vars.IMAGE_NAME }}
