@@ -39,4 +39,4 @@ jobs:
                 port: ${{ secrets.SERVER_PORT }}
                 script: 
                     docker pull toniismailz/${{ vars.IMAGE_NAME }}:${{ github.sha }}
-                    docker run d --restart=always -p 9001:9001 toniismailz/${{ vars.IMAGE_NAME }}:${{ github.sha }}
+                    docker run -d --restart=always -p 9001:9001 toniismailz/${{ vars.IMAGE_NAME }}:${{ github.sha }}
