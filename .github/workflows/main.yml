@@ -12,7 +12,7 @@ jobs:
     
           - name: Build Docker image
             run: |
-              docker build -t toniismailz/${{ vars.IMAGE_NAME }}:${{ github.sha }} .
+              docker build -t toniismailz/api-pc-ipm:${{ github.sha }} .
     
     push:
         needs: build
@@ -24,7 +24,7 @@ jobs:
                 DOCKER_PASSWORD: ${{ secrets.DOCKER_TOKEN }}
             - name: Push Docker image to Docker Hub
               run: |
-                docker push toniismailz/${{ vars.IMAGE_NAME }}:${{ github.sha }}
+                docker push toniismailz/api-pc-ipm:${{ github.sha }}
 
     deployment:
         needs: push
