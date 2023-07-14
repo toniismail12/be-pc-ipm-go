@@ -13,7 +13,7 @@ jobs:
 
       - name: Generate .env
         run: |
-          echo "PORT=${{ vars.PORT }}" >> .env
+          echo PORT=${{ vars.PORT }} >> .env
 
       - name: Build Docker image
         run: |
