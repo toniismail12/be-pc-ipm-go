@@ -11,6 +11,10 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
+      - name: Generate .env
+        run: |
+          echo PORT=${{ vars.PORT }} >> .env
+
       - name: Build Docker image
         run: |
           docker build -t ${{ vars.IMAGE_NAME }}:latest-and-mantul .
@@ -39,7 +43,7 @@ jobs:
           port: ${{ secrets.SERVER_PORT }}
           script: |
             docker stop $(docker ps -q --filter "publish=9001")
-            docker ps -aq --filter "status=exited" | xargs -r docker rm
-            docker images -f "dangling=true" --format "{{.ID}}" | xargs -r docker rmi
+            docker rm $(docker ps -a -q --filter ancestor=${{ vars.IMAGE_NAME }}:latest-and-mantul)
+            docker rmi ${{ vars.IMAGE_NAME }}:latest-and-mantul
             docker pull ${{ vars.IMAGE_NAME }}:latest-and-mantul
             docker run -d --restart=always -p 9001:9001 ${{ vars.IMAGE_NAME }}:latest-and-mantul
