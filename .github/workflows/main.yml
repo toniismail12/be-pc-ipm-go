@@ -4,20 +4,16 @@ on:
         branches: ["staging"]
 
 jobs:
-    build:
+    build-and-push:
         runs-on: ubuntu-latest
         steps:
-          - name: Checkout code
-            uses: actions/checkout@v2
+            - name: Checkout code
+              uses: actions/checkout@v2
     
-          - name: Build Docker image
-            run: |
-              docker build -t toniismailz/api-pc-ipm:${{ github.sha }} .
-    
-    push:
-        needs: build
-        runs-on: ubuntu-latest
-        steps:
+            - name: Build Docker image
+              run: |
+               docker build -t toniismailz/api-pc-ipm:${{ github.sha }} .
+
             - name: Checkout
               uses: actions/checkout@v3
 
@@ -32,7 +28,7 @@ jobs:
                 docker push toniismailz/api-pc-ipm:${{ github.sha }}
 
     deployment:
-        needs: push
+        needs: build-and-push
         environment: staging
         runs-on: ubuntu-latest
         steps:
