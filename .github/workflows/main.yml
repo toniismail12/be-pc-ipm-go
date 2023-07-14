@@ -13,7 +13,7 @@ jobs:
     
             - name: Build Docker image
               run: |
-               docker build -t ${{ secrets.DOCKER_USERNAME }}/${{ vars.IMAGE_NAME }} .
+               docker build -t ${{ secrets.DOCKER_USERNAME }}/${{ vars.IMAGE_NAME }}:${{ github.sha }} .
 
             - name: Connect to DockerHub
               uses: docker/login-action@v2
@@ -39,5 +39,5 @@ jobs:
                 port: ${{ secrets.SERVER_PORT }}
                 script: 
                     whoami
-                    docker pull ${{ secrets.DOCKER_USERNAME }}/${{ vars.IMAGE_NAME }}
+                    docker pull ${{ secrets.DOCKER_USERNAME }}/${{ vars.IMAGE_NAME }}:${{ github.sha }}
                     docker run -d --restart=always -p 9001:9001 ${{ secrets.DOCKER_USERNAME }}/${{ vars.IMAGE_NAME }}:${{ github.sha }}
