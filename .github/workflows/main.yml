@@ -38,6 +38,7 @@ jobs:
           password: ${{ secrets.SERVER_PASSWORD}}
           port: ${{ secrets.SERVER_PORT }}
           script: |
-            docker stop ${{ vars.IMAGE_NAME }}:latest-and-mantul || true && docker rm ${{ vars.IMAGE_NAME }}:latest-and-mantul || true
+            docker stop ${{ vars.IMAGE_NAME }}:latest-and-mantul
+            docker rm ${{ vars.IMAGE_NAME }}:latest-and-mantul
             docker pull ${{ vars.IMAGE_NAME }}:latest-and-mantul
             docker run -d --restart always -p 9001:9001 ${{ vars.IMAGE_NAME }}:latest-and-mantul
