@@ -13,6 +13,6 @@ func Setup(app *fiber.App) {
 	services.SetupCors(app)
 
 	app.Get("/", handler.AppName)
-	app.Get("/app", handler.AppName)
+	app.Get("/app-name", handler.AppName)
 
 }
