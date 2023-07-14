@@ -30,7 +30,7 @@ jobs:
     environment: staging
     runs-on: ubuntu-22.04
     steps:
-      - name: Delete Container and Images Old
+      - name: Setup in Server
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.SERVER }}
