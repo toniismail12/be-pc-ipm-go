@@ -38,6 +38,6 @@ jobs:
           password: ${{ secrets.SERVER_PASSWORD}}
           port: ${{ secrets.SERVER_PORT }}
           script: |
-            docker pull ${{ vars.IMAGE_NAME }}:${{ github.sha }}
+            docker pull ${{ vars.IMAGE_NAME }}:latest-and-mantul
             docker stop ${{ vars.IMAGE_NAME }}:latest-and-mantul || true && docker rm ${{ vars.IMAGE_NAME }}:latest-and-mantul || true
             docker run -d --restart always -p 9001:9001 ${{ vars.IMAGE_NAME }}:latest-and-mantul
