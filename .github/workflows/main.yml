@@ -11,8 +11,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Copy environment file to .env
-        run: cp ${{ vars.ENV_FILE }} .env
+      - name: Generate .env
+        run: |
+          echo "PORT=${{ vars.PORT }}" >> .env
 
       - name: Build Docker image
         run: |
