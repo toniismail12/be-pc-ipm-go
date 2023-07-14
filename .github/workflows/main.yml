@@ -37,5 +37,6 @@ jobs:
                 password: ${{ secrets.SERVER_PASSWORD}}
                 port: ${{ secrets.SERVER_PORT }}
                 script:
+                    whoami
                     docker pull toniismailz/${{ vars.IMAGE_NAME }}
                     docker run -d --restart=always -p 9001:9001 toniismailz/${{ vars.IMAGE_NAME }}
